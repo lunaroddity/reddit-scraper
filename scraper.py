@@ -20,31 +20,32 @@ data = []
 valid_flairs = ["Asshole", "Not the A-hole", "Everyone Sucks", "No A-holes Here"]
 
 for submission in aita.top(limit=10):
-    # include only submissions with the verdict flairs, UPDATE posts excluded
-    # so as to maximise the number of unique authors
-    # TODO: may not be 200 posts exactly since META and UPDATE posts excluded
-    if submission.link_flair_text in valid_flairs:
-      id = submission.id
-      title = submission.title
-      text = submission.selftext
-      verdict = submission.link_flair_text
-      url = submission.url
+  # include only submissions with the verdict flairs, UPDATE posts excluded
+  # so as to maximise the number of unique authors
+  # TODO: may not be 200 posts exactly since META and UPDATE posts excluded
+  if submission.link_flair_text in valid_flairs:
+    id = submission.id
+    title = submission.title
+    text = submission.selftext
+    verdict = submission.link_flair_text
+    url = submission.url
 
-    # from the text, identify the age and gender of the author using regex
+  # from the text, identify the age and gender of the author using regex
 
-    # if not found, set to None (to be determined manually later)
+  # if not found, set to None (to be determined manually later)
 
-    # data.append([id, title, text, gender, age, verdict, url])
+  # data.append([id, title, text, gender, age, verdict, url])
     data.append([id, title, text, verdict, url])
+  # print(data)
 
 # create a dataframe from the data
 df = pd.DataFrame(data, columns=["id", "title", "text", "verdict", "url"])
 
 # output separate files for each type of post
 # csv with all the data
-df.to_csv("aita_data.csv", index=False)
+# df.to_csv("aita_data.csv", index=False)
 
 # txt file with utf-8 encoding for corpus creation
 with open("aita_corpus.txt", "w", encoding="utf-8") as f:
-  full_text = df.to_string(columns=["title", "text"], header=False, index=False, encoding="utf-8")
+  full_text = df.to_string(columns=["text"], justify="left", line_width=80, header=False, index=False)
   f.write(full_text)
