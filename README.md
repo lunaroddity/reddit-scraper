@@ -1,2 +1,2 @@
-# aita-reddit-scraper
-Scraper for the AITA subreddit
+# reddit-scraper
+Scraper for the relationship_advice subreddit
