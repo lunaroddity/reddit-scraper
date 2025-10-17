@@ -33,10 +33,10 @@ for submission in relationship_advice.top(limit=300):
     gender = None
     age_gender = None
 
-    # author's self-reported age and gender typically follows the first-person singular pronouns 'i', 'my' or 'me'
+    # author's self-reported age and gender typically follows the singular first-person pronouns 'i', 'my', 'me', 'myself', or "i'm"
     # regex matches patterns like "I (25M)" or "my [f30]" or "me (m22)" etc.
     AGE_GENDER_RE = re.compile(
-      r'(?:i|my|me)(?:\s*)(?:\(|\[)'
+      r'(?:i|my|me|myself|i\'m)(?:\s*)(?:\(|\[)'
       r'(?P<gender1>[mf]*)(?:[^mf0-9])*(?P<age>\d{1,3})(?:[^mf0-9])*(?P<gender2>[mf]*)'
       r'(?:(\)|\]))',
       re.IGNORECASE
